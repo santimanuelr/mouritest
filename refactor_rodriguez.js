@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from "react";
-import { View, FlatList, Text, TouchableHighlight, Button } from "react-native";
+import { View, FlatList, Text, TouchableHighlight, Button, StyleSheet } from "react-native";
 import someListener from "some-listener-library";
 
 /*
@@ -25,13 +25,14 @@ import someListener from "some-listener-library";
   you to identify what can be improved with it visually.
 */
 
+const getTimeStamp = () => {
+  const date = new Date();
+  return date.toLocaleString();
+}
+
 const refactorComponent = props => {
 
-  const [ timeState, setTimeState ] = useState(
-    {
-      currentTimeStamp: getTimeStamp(),
-    }
-  );
+  const [ time, setTimeState ] = useState(getTimeStamp());
 
   useEffect(() => {
     const listener = someListener.register((e) => {
@@ -42,11 +43,6 @@ const refactorComponent = props => {
       listener.clear();
     };
   });
-
-  const getTimeStamp = () => {
-    const date = new Date();
-    return date.toLocaleString();
-  }
 
   const onPressButton = useCallback(() => {
     setTimeState(getTimeStamp());
@@ -102,6 +98,11 @@ const styles = StyleSheet.create({
 
 /*
   Write your notes below:
+
+  -Delete componentDidMount() because functional components does not have it.
+  -Implement useEffect instead
+  -Put styles in a constant
+  -Make use of useCallback for performance
 
 */
 
