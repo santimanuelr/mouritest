@@ -30,9 +30,11 @@ const getTimeStamp = () => {
   return date.toLocaleString();
 }
 
-const refactorComponent = props => {
+const RefactorComponent = props => {
 
   const [ time, setTimeState ] = useState(getTimeStamp());
+
+  const { dataSet } = props;
 
   useEffect(() => {
     const listener = someListener.register((e) => {
@@ -60,7 +62,7 @@ const refactorComponent = props => {
           onShowUnderlay={separators.highlight}
           onHideUnderlay={separators.unhighlight}
         >
-          <View style={{ backgroundColor: "white" }}>
+          <View style={styles.viewTime}>
             <Text>{title}</Text>
             <Text>{time}</Text>
           </View>
@@ -69,8 +71,6 @@ const refactorComponent = props => {
     },
     [time]
   );
-
-  const { dataSet } = props;
 
   return (
     <View style={styles.container}>
@@ -83,7 +83,7 @@ const refactorComponent = props => {
   );
 }
 
-export default refactorComponent;
+export default RefactorComponent;
 
 const styles = StyleSheet.create({
   container: {
@@ -94,6 +94,9 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 60,
   },
+  viewTime: {
+    backgroundColor: "white"
+  }
 });
 
 /*
