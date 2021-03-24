@@ -105,10 +105,3 @@ const styles = StyleSheet.create({
   -Make use of useCallback for performance
 
 */
-
-/*
-  state = {
-    currentTimeStamp: this.getTimeStamp(),
-  };
-
-*/
